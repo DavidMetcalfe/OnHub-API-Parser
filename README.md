@@ -1,6 +1,6 @@
 # OnHub API Parser
 
-Experimentation with the Google OnHub API, and general parsing of the available JSON.
+A simple dashboard for a few of the Google OnHub's API's.
 
 ## Installation
 
