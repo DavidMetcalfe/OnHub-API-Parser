@@ -1,4 +1,4 @@
-# OnHub API Parser
+# OnHub Status Dashboard
 
 A simple dashboard for a few of the Google OnHub's API's.
 
