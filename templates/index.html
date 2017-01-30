@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>OnHub Status Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Style overrides -->
+    <link href="/static/css/styles.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+      <script src="../js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">OnHub Dashboard</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Status <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" title="Parsing and page coming soon" href="http://onhub.here/api/v1/connected-devices" target="_blank">Connected Devices</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" title="Output diagnostic report from OnHub" href="http://onhub.here/api/v1/diagnostic-report">Diagnostic report</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+  <div class="container">
+  <dl>
+
+    {% for key, value in output.items() %}
+        <h2>{{ key.capitalize() }}</h2><hr class="half-rule"/>
+        {% for i in value.items() %}
+            {% if 'uptime' in i %}
+                <dd><b>{{ '{} :'.format(i[0]) }}</b>
+                {{ i[1]|uptime }}</dd>
+            {% else %}
+                <dd><b>{{ '{} :'.format(i[0]) }}</b>
+                {{ '{}'.format(i[1]) }}</dd>
+            {% endif %}
+        {% endfor %}<br/>
+    {% endfor %}
+
+  </dl>
+  </div><!-- /.container -->
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+
+  </body>
+</html>
