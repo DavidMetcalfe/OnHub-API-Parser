@@ -71,11 +71,6 @@ try:
 except:
     pass
 
-# for k, v in output.items():
-#     for i in v.items():
-#         print(type(i))
-
-
 @app.route('/')
 def index():
 
@@ -84,5 +79,14 @@ def index():
 
 
 @app.template_filter('uptime')
-def uptime(value, format='medium'):
-    return str(datetime.timedelta(seconds=value))
+def uptime(seconds):
+    daySeconds = 86400
+    hourSeconds = 3600
+    minuteSeconds = 60
+
+    if seconds >= daySeconds:
+        m, s = divmod(seconds, 60)
+        h, m = divmod(m, 60)
+        d, h = divmod(h, 24)
+
+    return "%d days, %d hours, %d minutes, %d seconds." % (d, h, m, s)
