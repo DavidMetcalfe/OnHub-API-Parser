@@ -2,16 +2,13 @@ import urllib.request
 import urllib.error
 import json
 from datetime import timedelta
-from webbrowser import open
+import webbrowser
 from collections import OrderedDict
 
 from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
-
-# Open browser to Flask App
-#webbrowser.open('http://127.0.0.1:5000')
 
 # Ensure responses aren't cached
 if app.config["DEBUG"]:
@@ -31,7 +28,12 @@ def fetchStatus():
     try:
         response = urllib.request.urlopen("http://onhub.here/api/v1/status").read()
         global output 
+        order = ("software", "system", "wan")
         output = OrderedDict(json.loads(response.decode("utf8")))
+        for key in order:
+            v = output[key]
+            del output[key]
+            output[key] = v
         upstatus = True
     except urllib.error.URLError:
         # Assume OnHub is down or other connectivity issues.
@@ -73,6 +75,9 @@ try:
         updateStatus = software['updateStatus']
 except:
     pass
+
+# Open browser to Flask App
+webbrowser.open('http://127.0.0.1:5000')
 
 @app.route('/')
 def index():
