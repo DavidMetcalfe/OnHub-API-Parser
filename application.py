@@ -92,5 +92,13 @@ def uptime(seconds):
         m, s = divmod(seconds, 60)
         h, m = divmod(m, 60)
         d, h = divmod(h, 24)
-
-    return "%d days, %d hours, %d minutes, %d seconds." % (d, h, m, s)
+        return "%d days, %d hours, %d minutes, %d seconds." % (d, h, m, s)
+    elif seconds >= hourSeconds:
+        m, s = divmod(seconds, 60)
+        h, m = divmod(m, 60)
+        return "%d hours, %d minutes, %d seconds." % (h, m, s)
+    elif seconds >= 60:
+        m, s = divmod(seconds, 60)        
+        return "%d minutes, %d seconds." % (m, s)
+    else:
+        return "%d seconds." % (seconds)
