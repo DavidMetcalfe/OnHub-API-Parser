@@ -53,16 +53,20 @@
 
 
     {% for key, value in output.items() %}
+      {% if 'wan' in key %}
+        <h2>{{ key.upper() }}</h2><p/>
+      {% else %}
         <h2>{{ key.capitalize() }}</h2><p/>
-        {% for i in value.items() %}
-            {% if 'uptime' in i %}
-                <li class="list-group-item"><b>{{ '{}:'.format(i[0]) }}</b>&nbsp;
-                {{ i[1]|uptime }}</li>
-            {% else %}
-                <li class="list-group-item"><b>{{ '{}:'.format(i[0]) }}</b>&nbsp;
-                {{ '{}'.format(i[1]) }}</li>
-            {% endif %}
-        {% endfor %}<br/>
+      {% endif %}
+      {% for i in value.items() %}
+        {% if 'uptime' in i %}
+          <li class="list-group-item"><b>{{ '{}:'.format(i[0]) }}</b>&nbsp;
+          {{ i[1]|uptime }}</li>
+        {% else %}
+          <li class="list-group-item"><b>{{ '{}:'.format(i[0]) }}</b>&nbsp;
+          {{ '{}'.format(i[1]) }}</li>
+        {% endif %}
+      {% endfor %}<br/>
     {% endfor %}
 
   </ul>
