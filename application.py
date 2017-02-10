@@ -1,8 +1,9 @@
 import urllib.request
 import urllib.error
 import json
-import datetime
-import webbrowser
+from datetime import timedelta
+from webbrowser import open
+from collections import OrderedDict
 
 from flask import Flask
 from flask import render_template
@@ -25,14 +26,12 @@ if app.config["DEBUG"]:
 # conn = sqlite3.connect('dashboard.db', check_same_thread=False)
 # db = conn.cursor()
 
-output = None
-
 def fetchStatus():
     # Fetch JSON from Status API.
     try:
         response = urllib.request.urlopen("http://onhub.here/api/v1/status").read()
         global output 
-        output = json.loads(response.decode("utf8"))
+        output = OrderedDict(json.loads(response.decode("utf8")))
         upstatus = True
     except urllib.error.URLError:
         # Assume OnHub is down or other connectivity issues.
