@@ -2,11 +2,15 @@ import urllib.request
 import urllib.error
 import json
 import datetime
+import webbrowser
 
 from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
+
+# Open browser to Flask App
+#webbrowser.open('http://127.0.0.1:5000')
 
 # Ensure responses aren't cached
 if app.config["DEBUG"]:

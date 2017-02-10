@@ -49,22 +49,23 @@
 
 
   <div class="container">
-  <dl>
+  <ul class="list-group">
+
 
     {% for key, value in output.items() %}
-        <h2>{{ key.capitalize() }}</h2><hr class="half-rule"/>
+        <h2>{{ key.capitalize() }}</h2><p/>
         {% for i in value.items() %}
             {% if 'uptime' in i %}
-                <dd><b>{{ '{} :'.format(i[0]) }}</b>
-                {{ i[1]|uptime }}</dd>
+                <li class="list-group-item"><b>{{ '{}:'.format(i[0]) }}</b>&nbsp;
+                {{ i[1]|uptime }}</li>
             {% else %}
-                <dd><b>{{ '{} :'.format(i[0]) }}</b>
-                {{ '{}'.format(i[1]) }}</dd>
+                <li class="list-group-item"><b>{{ '{}:'.format(i[0]) }}</b>&nbsp;
+                {{ '{}'.format(i[1]) }}</li>
             {% endif %}
         {% endfor %}<br/>
     {% endfor %}
 
-  </dl>
+  </ul>
   </div><!-- /.container -->
     
 
